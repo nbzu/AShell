@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Run a one-line script
-      run: apt-get install tmate
+      run: sudo apt-get install tmate
     - name: Run a multi-line script
       run: |
         tmate -S /tmp/tmate.sock new-session -d
