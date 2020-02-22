@@ -4,19 +4,20 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
-    - name: Run a one-line script
+    - name: env
       run: |
         sudo apt-get install tmate
         ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
+    - name: tmate
+      run: |
         tmate -S /tmp/tmate.sock new-session -d
         tmate -S /tmp/tmate.sock wait tmate-ready
         tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'    # Prints the SSH connection string
-        tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}' # Prints the read-only SSH connection string
-        tmate -S /tmp/tmate.sock display -p '#{tmate_web}'    # Prints the web connection string
-        tmate -S /tmp/tmate.sock display -p '#{tmate_web_ro}' # Prints the read-only web c
+        # tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}' # Prints the read-only SSH connection string
+        # tmate -S /tmp/tmate.sock display -p '#{tmate_web}'    # Prints the web connection string
+        # tmate -S /tmp/tmate.sock display -p '#{tmate_web_ro}' # Prints the read-only web c
     - name: sleep
       run: |
         while [ -S /tmp/tmate.sock ]; do
