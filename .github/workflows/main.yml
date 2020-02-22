@@ -1,0 +1,20 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run a one-line script
+      run: apt-get install tmate
+    - name: Run a multi-line script
+      run: |
+        tmate -S /tmp/tmate.sock new-session -d
+        tmate -S /tmp/tmate.sock wait tmate-ready
+        tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'    # Prints the SSH connection string
+        tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}' # Prints the read-only SSH connection string
+        tmate -S /tmp/tmate.sock display -p '#{tmate_web}'    # Prints the web connection string
+        tmate -S /tmp/tmate.sock display -p '#{tmate_web_ro}' # Prints the read-only web c
