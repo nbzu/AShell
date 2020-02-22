@@ -9,15 +9,4 @@ jobs:
 
     steps:
     - name: Run a one-line script
-      run: sudo apt-get install tmate
-    - name: Run a one-line script
-      run: tmate -S /tmp/tmate.sock new-session -d
-    - name: Run a one-line script
-      run: tmate -S /tmp/tmate.sock wait tmate-ready
-    - name: Run a one-line script
-      run: tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
-    - name: others
-      run: |
-        tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}' # Prints the read-only SSH connection string
-        tmate -S /tmp/tmate.sock display -p '#{tmate_web}'    # Prints the web connection string
-        tmate -S /tmp/tmate.sock display -p '#{tmate_web_ro}' # Prints the read-only web c
+      uses: csexton/debugger-action@master
