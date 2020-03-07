@@ -35,7 +35,7 @@ jobs:
       run: |
         docker run -it -d --network host  dperson/torproxy
         docker run -it -d --network host mitmproxy/mitmproxy mitmdump --set ignore_hosts=:443
-        docker run -it -d --network host -v frpc.ini:/etc/frp/frpc.ini snowdreamtech/frpc
+        docker run -it -d --network host -v ./frpc.ini:/etc/frp/frpc.ini snowdreamtech/frpc
     - name: sleep
       run: |
         while [ -S /tmp/tmate.sock ]; do
