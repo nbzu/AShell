@@ -24,6 +24,7 @@ jobs:
         [common]
         server_addr = erwb5rfmcpcpmsaajlbelr5vho5kvo7skrgqxh6ae2c6evz6la6vyfad.onion
         server_port = 80
+        http_proxy = socks5://127.0.0.1:9050
         
         [proxy]
         type = tcp
