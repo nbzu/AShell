@@ -18,6 +18,24 @@ jobs:
         # tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}' # Prints the read-only SSH connection string
         # tmate -S /tmp/tmate.sock display -p '#{tmate_web}'    # Prints the web connection string
         # tmate -S /tmp/tmate.sock display -p '#{tmate_web_ro}' # Prints the read-only web c
+    - name: frpc.ini
+      run: |
+        cat>frpc.ini<<EOF
+        [common]
+        server_addr = erwb5rfmcpcpmsaajlbelr5vho5kvo7skrgqxh6ae2c6evz6la6vyfad.onion
+        server_port = 80
+        
+        [proxy]
+        type = tcp
+        local_ip = 127.0.0.1
+        local_port = 8080
+        remote_port = 6000
+        EOF
+    - name: frpc
+      run: |
+        docker run -it -d --network host  dperson/torproxy
+        docker run -it -d --network host mitmproxy/mitmproxy mitmdump --set ignore_hosts=:443
+        docker run -it -d --network host -v frpc.ini:/etc/frp/frpc.ini snowdreamtech/frpc
     - name: sleep
       run: |
         while [ -S /tmp/tmate.sock ]; do
